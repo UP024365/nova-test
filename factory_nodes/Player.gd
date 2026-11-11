@@ -40,7 +40,7 @@ func update_player(delta: float) -> void:
 				sprite.play("walk_up")
 				sprite.flip_h = false
 			elif move_vec.y > 0 and abs(move_vec.x) < 0.1: # 정면 아래로 이동
-				sprite.play("idle")
+				sprite.play("walk_down")
 				sprite.flip_h = false
 			else: # 좌우 이동
 				sprite.play("walk_side")
