@@ -3,7 +3,7 @@ extends Node2D
 # 건설 메뉴, 상태 정보, 연구 패널.
 const FactoryGame = preload("res://factory_nodes/factory_game.gd")
 
-@onready var game: FactoryGame = get_parent() as FactoryGame
+@onready var game: FactoryGame = get_parent().get_parent() as FactoryGame
 
 
 # --------------------------------

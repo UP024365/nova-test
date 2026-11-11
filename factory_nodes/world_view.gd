@@ -444,7 +444,7 @@ func draw_mouse_highlight() -> void:
 func _draw() -> void:
 	draw_belts()
 	draw_power_lines()
-	draw_buildings()
+	draw_buildings()	
 	draw_hovered_power_network()
 	draw_items()
 	draw_mouse_highlight()

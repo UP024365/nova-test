@@ -1,30 +1,39 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene format=3 uid="uid://v1t27hodx1ai"]
 
-[ext_resource type="Script" path="res://factory_nodes/factory_game.gd" id="1"]
-[ext_resource type="Script" path="res://factory_nodes/construction.gd" id="2"]
-[ext_resource type="Script" path="res://factory_nodes/power.gd" id="3"]
-[ext_resource type="Script" path="res://factory_nodes/production.gd" id="4"]
-[ext_resource type="Script" path="res://factory_nodes/progress.gd" id="5"]
-[ext_resource type="Script" path="res://factory_nodes/hud.gd" id="6"]
-[ext_resource type="Script" path="res://factory_nodes/world_view.gd" id="7"]
+[ext_resource type="Script" uid="uid://d386yp0ptwg5j" path="res://factory_nodes/factory_game.gd" id="1"]
+[ext_resource type="Script" uid="uid://dyjt2way5rhtg" path="res://factory_nodes/construction.gd" id="2"]
+[ext_resource type="Script" uid="uid://3n42af3hr1un" path="res://factory_nodes/power.gd" id="3"]
+[ext_resource type="Script" uid="uid://bddjmwn1eicrs" path="res://factory_nodes/production.gd" id="4"]
+[ext_resource type="Script" uid="uid://bj30up1xd34de" path="res://factory_nodes/progress.gd" id="5"]
+[ext_resource type="Script" uid="uid://bct0ik4knuwn" path="res://factory_nodes/hud.gd" id="6"]
+[ext_resource type="Script" uid="uid://x1joca6bj67e" path="res://factory_nodes/world_view.gd" id="7"]
+[ext_resource type="Script" uid="uid://dng34bfvos1um" path="res://factory_nodes/Player.gd" id="8_xtijr"]
 
-[node name="FactoryGame" type="Node2D"]
+[node name="FactoryGame" type="Node2D" unique_id=2033913977]
 script = ExtResource("1")
 
-[node name="Construction" type="Node2D" parent="."]
+[node name="Construction" type="Node2D" parent="." unique_id=1814492390]
 script = ExtResource("2")
 
-[node name="Power" type="Node2D" parent="."]
+[node name="Power" type="Node2D" parent="." unique_id=1869250659]
 script = ExtResource("3")
 
-[node name="Production" type="Node2D" parent="."]
+[node name="Production" type="Node2D" parent="." unique_id=644789843]
 script = ExtResource("4")
 
-[node name="Progress" type="Node2D" parent="."]
+[node name="Progress" type="Node2D" parent="." unique_id=310182958]
 script = ExtResource("5")
 
-[node name="HUD" type="Node2D" parent="."]
-script = ExtResource("6")
-
-[node name="WorldView" type="Node2D" parent="."]
+[node name="WorldView" type="Node2D" parent="." unique_id=924827748]
 script = ExtResource("7")
+
+[node name="Player" type="Node2D" parent="." unique_id=2097716055]
+script = ExtResource("8_xtijr")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2120511519]
+position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1000240441]
+
+[node name="HUD" type="Node2D" parent="CanvasLayer" unique_id=846648701]
+script = ExtResource("6")

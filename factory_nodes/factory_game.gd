@@ -5,8 +5,9 @@ extends Node2D
 @onready var power = $Power
 @onready var production = $Production
 @onready var progress = $Progress
-@onready var hud = $HUD
+@onready var hud = $CanvasLayer/HUD
 @onready var world_view = $WorldView
+@onready var player = $Player
 
 
 const GRID_SIZE: int = 64
@@ -105,6 +106,8 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	player.update_player(delta)
+	
 	power.update_power_plants(delta)
 	power.calculate_power()
 
@@ -147,8 +150,10 @@ func _input(event: InputEvent) -> void:
 				progress.buy_research("연료 효율")
 
 	if event is InputEventMouseMotion:
-		mouse_cell = get_grid_cell(event.position)
-		mouse_in_game = event.position.x >= UI_WIDTH
+		# 카메라 이동이 반영된 실제 월드 상의 마우스 위치를 가져옴
+		var world_mouse_pos: Vector2 = get_global_mouse_position()
+		mouse_cell = get_grid_cell(world_mouse_pos)
+		mouse_in_game = event.position.x >= UI_WIDTH  # UI 검사는 화면 좌표 유지
 		construction.update_hovered_pole()
 
 		if dragging_belt and mouse_in_game:
@@ -160,7 +165,8 @@ func _input(event: InputEvent) -> void:
 				if event.position.x < UI_WIDTH:
 					construction.select_from_menu(event.position)
 				else:
-					mouse_cell = get_grid_cell(event.position)
+					var world_mouse_pos: Vector2 = get_global_mouse_position()
+					mouse_cell = get_grid_cell(world_mouse_pos)
 					mouse_in_game = true
 					construction.update_hovered_pole()
 
@@ -276,3 +282,5 @@ func redraw_game() -> void:
 	queue_redraw()
 	hud.queue_redraw()
 	world_view.queue_redraw()
+	if player:
+		player.queue_redraw()
