@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://factory_nodes/factory_game.gd" id="1"]
+[ext_resource type="Script" path="res://factory_nodes/construction.gd" id="2"]
+[ext_resource type="Script" path="res://factory_nodes/power.gd" id="3"]
+[ext_resource type="Script" path="res://factory_nodes/production.gd" id="4"]
+[ext_resource type="Script" path="res://factory_nodes/progress.gd" id="5"]
+[ext_resource type="Script" path="res://factory_nodes/hud.gd" id="6"]
+[ext_resource type="Script" path="res://factory_nodes/world_view.gd" id="7"]
+
+[node name="FactoryGame" type="Node2D"]
+script = ExtResource("1")
+
+[node name="Construction" type="Node2D" parent="."]
+script = ExtResource("2")
+
+[node name="Power" type="Node2D" parent="."]
+script = ExtResource("3")
+
+[node name="Production" type="Node2D" parent="."]
+script = ExtResource("4")
+
+[node name="Progress" type="Node2D" parent="."]
+script = ExtResource("5")
+
+[node name="HUD" type="Node2D" parent="."]
+script = ExtResource("6")
+
+[node name="WorldView" type="Node2D" parent="."]
+script = ExtResource("7")
