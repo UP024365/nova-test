@@ -9,9 +9,12 @@ extends Node2D
 @onready var world_view = $WorldView
 @onready var player = $Player
 
-
 const GRID_SIZE: int = 64
 const UI_WIDTH: int = 190
+
+# 맵 크기 설정 (타일 단위: 가로 50칸, 세로 35칸 = 약 3200 x 2240px)
+const MAP_TILES_X: int = 50
+const MAP_TILES_Y: int = 35
 
 const BELT_SPEED: float = 1.2
 const MINING_INTERVAL: float = 2.0
@@ -81,14 +84,14 @@ var power_plant_timers: Dictionary = {}
 var mouse_cell: Vector2i = Vector2i.ZERO
 var mouse_in_game: bool = false
 
-# STEP 19: 전력 범위 표시
+# 전력 범위 표시
 var show_power_ranges: bool = true
 
-# STEP 21: 전봇대 마우스 오버 및 전력망 강조 표시
+# 전봇대 마우스 오버 및 전력망 강조 표시
 var hovered_pole_cell: Vector2i = Vector2i.ZERO
 var has_hovered_pole: bool = false
 
-# 통합 업데이트: 연구, 저장, 자동 저장
+# 연구 및 자동 저장
 var research_panel_open: bool = false
 var research_points: int = 0
 var mining_research_level: int = 0
@@ -129,7 +132,6 @@ func _process(delta: float) -> void:
 
 
 func _input(event: InputEvent) -> void:
-	# V 키로 전력 범위 표시 전환
 	if event is InputEventKey:
 		if event.pressed and not event.echo:
 			if event.keycode == KEY_V:
@@ -150,10 +152,9 @@ func _input(event: InputEvent) -> void:
 				progress.buy_research("연료 효율")
 
 	if event is InputEventMouseMotion:
-		# 카메라 이동이 반영된 실제 월드 상의 마우스 위치를 가져옴
 		var world_mouse_pos: Vector2 = get_global_mouse_position()
 		mouse_cell = get_grid_cell(world_mouse_pos)
-		mouse_in_game = event.position.x >= UI_WIDTH  # UI 검사는 화면 좌표 유지
+		mouse_in_game = event.position.x >= UI_WIDTH
 		construction.update_hovered_pole()
 
 		if dragging_belt and mouse_in_game:
@@ -181,7 +182,7 @@ func _input(event: InputEvent) -> void:
 
 
 # --------------------------------
-# 좌표 및 메뉴
+# 좌표 변환 및 거리 계산
 # --------------------------------
 
 func get_grid_cell(pos: Vector2) -> Vector2i:
@@ -201,43 +202,31 @@ func grid_distance(a: Vector2i, b: Vector2i) -> int:
 	return abs(a.x - b.x) + abs(a.y - b.y)
 
 
-func draw_background() -> void:
-	draw_rect(
-		Rect2(0, 0, 1280, 720),
-		Color("#26302e")
-	)
-
+# --------------------------------
+# 동적 그리드 및 전력 범위 렌더링
+# --------------------------------
 
 func draw_grid() -> void:
-	for x in range(0, 1200, GRID_SIZE):
-		var screen_x: float = UI_WIDTH + x
+	var map_width: float = MAP_TILES_X * GRID_SIZE
+	var map_height: float = MAP_TILES_Y * GRID_SIZE
+	var line_color := Color(0.25, 0.35, 0.3, 0.25)
 
-		draw_line(
-			Vector2(screen_x, 0),
-			Vector2(screen_x, 720),
-			Color("#394541"),
-			1.0
-		)
+	# 세로선
+	for x in range(MAP_TILES_X + 1):
+		var screen_x: float = UI_WIDTH + x * GRID_SIZE
+		draw_line(Vector2(screen_x, 0), Vector2(screen_x, map_height), line_color, 1.0)
 
-	for y in range(0, 720, GRID_SIZE):
-		draw_line(
-			Vector2(UI_WIDTH, y),
-			Vector2(1280, y),
-			Color("#394541"),
-			1.0
-		)
+	# 가로선
+	for y in range(MAP_TILES_Y + 1):
+		var screen_y: float = y * GRID_SIZE
+		draw_line(Vector2(UI_WIDTH, screen_y), Vector2(UI_WIDTH + map_width, screen_y), line_color, 1.0)
 
-
-# --------------------------------
-# STEP 19: 전력 범위 시각화
-# --------------------------------
 
 func draw_power_ranges() -> void:
 	if not show_power_ranges:
 		return
 
 	for pole_cell in powered_poles.keys():
-		# 전봇대의 전체 연결 범위
 		for x in range(-POLE_CONNECTION_RANGE, POLE_CONNECTION_RANGE + 1):
 			for y in range(-POLE_CONNECTION_RANGE, POLE_CONNECTION_RANGE + 1):
 				if abs(x) + abs(y) > POLE_CONNECTION_RANGE:
@@ -247,14 +236,10 @@ func draw_power_ranges() -> void:
 				var target_pos: Vector2 = grid_to_screen(target_cell)
 
 				draw_rect(
-					Rect2(
-						target_pos - Vector2(GRID_SIZE / 2.0, GRID_SIZE / 2.0),
-						Vector2(GRID_SIZE, GRID_SIZE)
-					),
+					Rect2(target_pos - Vector2(GRID_SIZE / 2.0, GRID_SIZE / 2.0), Vector2(GRID_SIZE, GRID_SIZE)),
 					Color(0.25, 0.8, 0.45, 0.055)
 				)
 
-		# 기계에 전력을 공급하는 범위
 		for x in range(-BUILDING_CONNECTION_RANGE, BUILDING_CONNECTION_RANGE + 1):
 			for y in range(-BUILDING_CONNECTION_RANGE, BUILDING_CONNECTION_RANGE + 1):
 				if abs(x) + abs(y) > BUILDING_CONNECTION_RANGE:
@@ -264,16 +249,12 @@ func draw_power_ranges() -> void:
 				var target_pos: Vector2 = grid_to_screen(target_cell)
 
 				draw_rect(
-					Rect2(
-						target_pos - Vector2(30, 30),
-						Vector2(60, 60)
-					),
+					Rect2(target_pos - Vector2(30, 30), Vector2(60, 60)),
 					Color(0.3, 0.65, 1.0, 0.08)
 				)
 
 
 func _draw() -> void:
-	draw_background()
 	draw_grid()
 	draw_power_ranges()
 

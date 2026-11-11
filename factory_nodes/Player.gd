@@ -48,9 +48,15 @@ func update_player(delta: float) -> void:
 
 		var target_pos: Vector2 = position + move_vec * MOVE_SPEED * delta
 
-		# UI 패널(좌측 190px) 및 상단 경계 침범 방지
-		target_pos.x = maxf(target_pos.x, FactoryGame.UI_WIDTH + PLAYER_SIZE)
-		target_pos.y = maxf(target_pos.y, PLAYER_SIZE)
+		# 맵 4방향 경계 제한 (UI 좌측선 ~ 맵 가로 끝, 상단 0 ~ 맵 세로 끝)
+		var min_x: float = FactoryGame.UI_WIDTH + PLAYER_SIZE
+		var max_x: float = FactoryGame.UI_WIDTH + (FactoryGame.MAP_TILES_X * FactoryGame.GRID_SIZE) - PLAYER_SIZE
+
+		var min_y: float = PLAYER_SIZE
+		var max_y: float = (FactoryGame.MAP_TILES_Y * FactoryGame.GRID_SIZE) - PLAYER_SIZE
+
+		target_pos.x = clampf(target_pos.x, min_x, max_x)
+		target_pos.y = clampf(target_pos.y, min_y, max_y)
 
 		var target_cell: Vector2i = game.get_grid_cell(target_pos)
 		var can_move: bool = true
