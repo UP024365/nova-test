@@ -7,7 +7,41 @@
 [ext_resource type="Script" uid="uid://bj30up1xd34de" path="res://factory_nodes/progress.gd" id="5"]
 [ext_resource type="Script" uid="uid://bct0ik4knuwn" path="res://factory_nodes/hud.gd" id="6"]
 [ext_resource type="Script" uid="uid://x1joca6bj67e" path="res://factory_nodes/world_view.gd" id="7"]
+[ext_resource type="Texture2D" uid="uid://bfrgxbr8dlffp" path="res://assets/sprites/player/player_idle.png" id="8_stlnn"]
 [ext_resource type="Script" uid="uid://dng34bfvos1um" path="res://factory_nodes/Player.gd" id="8_xtijr"]
+[ext_resource type="Texture2D" uid="uid://bs77a5lkmwac8" path="res://assets/sprites/player/player_walk1.png" id="9_vvqe7"]
+[ext_resource type="Texture2D" uid="uid://bnfi7v1ncafma" path="res://assets/sprites/player/player_walk2.png" id="10_jli36"]
+[ext_resource type="Texture2D" uid="uid://bowdtt8vydahi" path="res://assets/sprites/player/player_back.png" id="11_hjs3v"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5h11f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_stlnn")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_vvqe7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_jli36")
+}],
+"loop": 1,
+"name": &"walk_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_hjs3v")
+}],
+"loop": 1,
+"name": &"walk_up",
+"speed": 5.0
+}]
 
 [node name="FactoryGame" type="Node2D" unique_id=2033913977]
 script = ExtResource("1")
@@ -32,6 +66,10 @@ script = ExtResource("8_xtijr")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2120511519]
 position_smoothing_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player" unique_id=3997935]
+sprite_frames = SubResource("SpriteFrames_5h11f")
+animation = &"walk_up"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1000240441]
 
