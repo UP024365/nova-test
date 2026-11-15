@@ -12,7 +12,6 @@
 [ext_resource type="Script" uid="uid://dng34bfvos1um" path="res://factory_nodes/Player.gd" id="8_xtijr"]
 [ext_resource type="Texture2D" uid="uid://c15vqw4lyg06m" path="res://assets/sprites/player/Idle.png" id="10_stlnn"]
 [ext_resource type="Texture2D" uid="uid://c1hixemn5xo8t" path="res://assets/sprites/player/Walk.png" id="11_vvqe7"]
-[ext_resource type="Script" uid="uid://cplyg4g3hoge6" path="res://factory_nodes/mainmenu.gd" id="13_vvqe7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jli36"]
 texture = ExtResource("2_vvqe7")
@@ -405,81 +404,3 @@ animation = &"walk_down"
 
 [node name="HUD" type="Node2D" parent="CanvasLayer" unique_id=846648701]
 script = ExtResource("6")
-
-[node name="MainMenu" type="Control" parent="." unique_id=56972315]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("13_vvqe7")
-
-[node name="Background" type="TextureRect" parent="MainMenu" unique_id=885038787]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="CenterContainer" type="CenterContainer" parent="MainMenu" unique_id=503738044]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="MenuPanel" type="VBoxContainer" parent="MainMenu/CenterContainer" unique_id=1999302819]
-layout_mode = 2
-
-[node name="GameTitle" type="Label" parent="MainMenu/CenterContainer/MenuPanel" unique_id=1367220248]
-layout_mode = 2
-
-[node name="SubTitle" type="Label" parent="MainMenu/CenterContainer/MenuPanel" unique_id=1577175126]
-layout_mode = 2
-
-[node name="NewGameButton" type="Button" parent="MainMenu/CenterContainer/MenuPanel" unique_id=779569088]
-layout_mode = 2
-
-[node name="LoadGameButton" type="Button" parent="MainMenu/CenterContainer/MenuPanel" unique_id=1035698927]
-layout_mode = 2
-
-[node name="SettingsButton" type="Button" parent="MainMenu/CenterContainer/MenuPanel" unique_id=1950028898]
-layout_mode = 2
-
-[node name="CreditsButton" type="Button" parent="MainMenu/CenterContainer/MenuPanel" unique_id=2001751972]
-layout_mode = 2
-
-[node name="ExitButton" type="Button" parent="MainMenu/CenterContainer/MenuPanel" unique_id=1185468322]
-layout_mode = 2
-
-[node name="SettingsPanel" type="PanelContainer" parent="MainMenu" unique_id=1015674831]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="SettingsVBox" type="VBoxContainer" parent="MainMenu/SettingsPanel" unique_id=619796362]
-layout_mode = 2
-
-[node name="SettingsTitle" type="Label" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=1092106426]
-layout_mode = 2
-
-[node name="MasterVolumeLabel" type="Label" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=2125470469]
-layout_mode = 2
-
-[node name="MasterVolumeSlider" type="HSlider" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=1078017584]
-layout_mode = 2
-
-[node name="MusicVolumeLabel" type="Label" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=1747110489]
-layout_mode = 2
-
-[node name="MusicVolumeSlider" type="HSlider" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=748943524]
-layout_mode = 2
-
-[node name="SFXVolumeLabel" type="Label" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=1825981306]
-layout_mode = 2
-
-[node name="SFXVolumeSlider" type="HSlider" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=418991193]
-layout_mode = 2
-
-[node name="SettingsBackButton" type="Button" parent="MainMenu/SettingsPanel/SettingsVBox" unique_id=705859953]
-layout_mode = 2
-
-[node name="CreditsPanel" type="PanelContainer" parent="MainMenu" unique_id=1772494859]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0

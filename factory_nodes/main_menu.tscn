@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://qy5t0jcornen"]
+
+[ext_resource type="Script" uid="uid://ctyob8xjm4ky1" path="res://factory_nodes/main_menu.gd" id="1_gf7xx"]
+[ext_resource type="Texture2D" uid="uid://drtj52rx8o7is" path="res://assets/ui/main_menu_bg.png" id="2_gf7xx"]
+[ext_resource type="AudioStream" uid="uid://b87bpgkbh0k8u" path="res://assets/audio/bgm_main_menu.mp3" id="3_ov5q6"]
+
+[node name="MainMenu" type="Control" unique_id=1004271638]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gf7xx")
+
+[node name="Background" type="TextureRect" parent="." unique_id=589546674]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_gf7xx")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=976255668]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MenuPanel" type="VBoxContainer" parent="CenterContainer" unique_id=1015361514]
+layout_mode = 2
+
+[node name="GameTitle" type="Label" parent="CenterContainer/MenuPanel" unique_id=1916918679]
+layout_mode = 2
+text = "NOVA"
+horizontal_alignment = 1
+
+[node name="SubTitle" type="Label" parent="CenterContainer/MenuPanel" unique_id=930358851]
+layout_mode = 2
+
+[node name="NewGameButton" type="Button" parent="CenterContainer/MenuPanel" unique_id=674671139]
+layout_mode = 2
+
+[node name="LoadGameButton" type="Button" parent="CenterContainer/MenuPanel" unique_id=688677329]
+layout_mode = 2
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/MenuPanel" unique_id=1425410697]
+layout_mode = 2
+
+[node name="CreditsButton" type="Button" parent="CenterContainer/MenuPanel" unique_id=1367706788]
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="CenterContainer/MenuPanel" unique_id=1339524768]
+layout_mode = 2
+
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=870297371]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SettingsVBox" type="VBoxContainer" parent="SettingsPanel" unique_id=1674805543]
+layout_mode = 2
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/SettingsVBox" unique_id=1244239327]
+layout_mode = 2
+
+[node name="MasterVolumeLabel" type="Label" parent="SettingsPanel/SettingsVBox" unique_id=1409544091]
+layout_mode = 2
+
+[node name="MasterVolumeSlider" type="HSlider" parent="SettingsPanel/SettingsVBox" unique_id=1229343487]
+layout_mode = 2
+
+[node name="MusicVolumeLabel" type="Label" parent="SettingsPanel/SettingsVBox" unique_id=1382108626]
+layout_mode = 2
+
+[node name="MusicVolumeSlider" type="HSlider" parent="SettingsPanel/SettingsVBox" unique_id=1037885064]
+layout_mode = 2
+
+[node name="SFXVolumeLabel" type="Label" parent="SettingsPanel/SettingsVBox" unique_id=1836225136]
+layout_mode = 2
+
+[node name="SFXVolumeSlider" type="HSlider" parent="SettingsPanel/SettingsVBox" unique_id=606130852]
+layout_mode = 2
+
+[node name="SettingsBackButton" type="Button" parent="SettingsPanel/SettingsVBox" unique_id=686919266]
+layout_mode = 2
+
+[node name="CreditsPanel" type="PanelContainer" parent="." unique_id=826579805]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=111154619]
+stream = ExtResource("3_ov5q6")
+autoplay = true
